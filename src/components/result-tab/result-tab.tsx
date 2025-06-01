@@ -39,35 +39,38 @@ const ResultTab: React.FC<ValidatedForm> = ({ items, heading, buttons }) => {
   }
 
   return (
-    <form className={css.form}>
-      {heading && <h2 className={css.heading}>{heading}</h2>}
+    <>
+      <form className={css.form}>
+        {heading && <h2 className={css.heading}>{heading}</h2>}
 
-      {items.map((item, index) => {
-        const id = `field-${index}`
-        const Component = componentMap[item.type as keyof ComponentMap]
+        {items.map((item, index) => {
+          const id = `field-${index}`
+          const Component = componentMap[item.type as keyof ComponentMap]
 
-        if (!Component) {
-          return (
-            <div key={id} className={css.field}>
-              <p>Unsupported field type: {item.type}</p>
-            </div>
-          )
-        }
+          if (!Component) {
+            return (
+              <div key={id} className={css.field}>
+                <p>Unsupported field type: {item.type}</p>
+              </div>
+            )
+          }
 
-        if (item.type === 'enum') {
-          return (
-            <RadioInput
-              key={id}
-              name={item.label}
-              label={item.label}
-              values={item.values || []}
-            />
-          )
-        }
+          if (item.type === 'enum') {
+            return (
+              <RadioInput
+                key={id}
+                name={item.label}
+                label={item.label}
+                values={item.values || []}
+              />
+            )
+          }
 
-        const BaseComponent = Component as React.ComponentType<BaseComponentProps>
-        return <BaseComponent key={id} name={item.label} label={item.label} />
-      })}
+          const BaseComponent =
+            Component as React.ComponentType<BaseComponentProps>
+          return <BaseComponent key={id} name={item.label} label={item.label} />
+        })}
+      </form>
 
       {buttons && buttons.length > 0 && (
         <div className={css.buttonGroup}>
@@ -82,7 +85,7 @@ const ResultTab: React.FC<ValidatedForm> = ({ items, heading, buttons }) => {
           ))}
         </div>
       )}
-    </form>
+    </>
   )
 }
 

@@ -2,32 +2,35 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import css from './config-tab.module.less'
 import { validateAndParseJsonInput } from '../../utils/parse-validate-json'
-import { sampleJson } from '../../const/sample-json'
 import { ValidatedForm } from '../../types/form'
 import JsonDocs from '../json-docs/json-docs'
 
 type ConfigTabProps = {
+  wholeJson: string
+  setWholeJson: (json: string) => void
   onValidSchema: (data: ValidatedForm) => void
   setActiveTab: (i: number) => void
 }
 
 const ConfigTab: React.FC<ConfigTabProps> = ({
+  wholeJson,
+  setWholeJson,
   onValidSchema,
   setActiveTab,
 }) => {
-  const [jsonInput, setJsonInput] = useState<string>(
-    JSON.stringify(sampleJson, null, 2)
-  )
+
   const [isValid, setIsValid] = useState(true)
   const [jsonError, setJsonError] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value
-    setJsonInput(value)
+    setWholeJson(value)
   }
 
   const handleApply = () => {
-    const result = validateAndParseJsonInput(jsonInput)
+		setWholeJson(wholeJson)
+		const result = validateAndParseJsonInput(wholeJson)
+		
 
     if (result.valid) {
       setIsValid(true)
@@ -53,7 +56,7 @@ const ConfigTab: React.FC<ConfigTabProps> = ({
           <textarea
             rows={10}
             cols={60}
-            value={jsonInput}
+            value={wholeJson}
             onChange={handleChange}
             className={clsx(css.textarea, {
               [css.invalid]: !isValid,
