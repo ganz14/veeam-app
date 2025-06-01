@@ -4,6 +4,7 @@ import css from './config-tab.module.less'
 import { validateAndParseJsonInput } from '../../utils/parse-validate-json'
 import { sampleJson } from '../../const/sample-json'
 import { ValidatedForm } from '../../types/form'
+import JsonDocs from '../json-docs/json-docs'
 
 type ConfigTabProps = {
   onValidSchema: (data: ValidatedForm) => void
@@ -42,35 +43,40 @@ const ConfigTab: React.FC<ConfigTabProps> = ({
       setJsonError(result.error ?? null)
       onValidSchema({ items: [] })
     }
-	}
+  }
 
   return (
-    <div className={css.container}>
-      <h3 className={css.title}>JSON Builder Config</h3>
-      <div className={css.inputContainer}>
-        <textarea
-          rows={10}
-          cols={60}
-          value={jsonInput}
-          onChange={handleChange}
-          className={clsx(css.textarea, {
-            [css.invalid]: !isValid,
-          })}
-        />
-        {!isValid && (
-          <div className={css.errorContainer}>
-            <p className={css.error}>Invalid JSON format!</p>
-            {jsonError && <p className={css.error}>{jsonError}</p>}
-          </div>
-        )}
-      </div>
+    <>
+      <div className={css.container}>
+        <h3 className={css.title}>JSON Form Builder Config</h3>
+        <div className={css.inputContainer}>
+          <textarea
+            rows={10}
+            cols={60}
+            value={jsonInput}
+            onChange={handleChange}
+            className={clsx(css.textarea, {
+              [css.invalid]: !isValid,
+            })}
+          />
+          {!isValid && (
+            <div className={css.errorContainer}>
+              <p className={css.error}>Invalid JSON format!</p>
+              {jsonError && <p className={css.error}>{jsonError}</p>}
+            </div>
+          )}
+        </div>
 
-      <div>
-        <button className={css.applyButton} onClick={handleApply}>
-          Apply
-        </button>
+        <div>
+          <button className={css.applyButton} onClick={handleApply}>
+            Apply
+          </button>
+        </div>
       </div>
-    </div>
+      <div className={css.footer}>
+        <JsonDocs />
+      </div>
+    </>
   )
 }
 
