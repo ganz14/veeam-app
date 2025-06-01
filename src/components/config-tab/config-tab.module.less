@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1px;
+}
+
+.title {
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.textarea {
+  font-family: monospace;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  width: 600px;
+  height: 300px;
+  &.invalid {
+    border-color: red;
+  }
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin: 5px 0;
+} 
+
+.applyButton {
+    width: 100px;
+    margin: 10px 10px 0 0;
+    padding: 6px 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+  
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  &:disabled:hover {
+    background-color: #ccc;
+  }
+
+}

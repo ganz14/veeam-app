@@ -1,0 +1,31 @@
+.tabs {
+    display: flex;
+}
+  
+.tab {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 2px solid white;
+    background: none;
+    font-weight: bold;
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &:hover {
+        border: 2px solid lightgray;
+        border-bottom: none;
+    }
+
+    &.activeTab {
+        border: 2px solid #29a71a;
+        border-bottom: none;
+    }
+}
+  
+  
+.tabContent {
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
